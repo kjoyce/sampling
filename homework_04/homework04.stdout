@@ -1,0 +1,240 @@
+
+R version 3.1.2 (2014-10-31) -- "Pumpkin Helmet"
+Copyright (C) 2014 The R Foundation for Statistical Computing
+Platform: x86_64-unknown-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+>  source('problem1.r',echo=T); source('problem2.r',echo=T); source('problem3.r',echo=T); source('problem4.r',echo=T); source('problem5.r',echo=T); source('problem6.r',echo=T); 
+
+> rm(list = ls())
+
+> N = 80
+
+> ratio_estimate = function(x, y) {
++     n <- length(y)
++     tau.x <- sum(x)
++     x = x[1:n]
++     r <- sum(y)/sum(x)
++     tau.hat.r <- r * tau.x
+ .... [TRUNCATED] 
+
+> double_sample_estimate = function(x, y) {
++     n <- length(y)
++     x1 = x[1:n]
++     np <- length(x)
++     r <- sum(y)/sum(x1)
++     tau.hat.x <-  .... [TRUNCATED] 
+
+> out = data.frame(row.names = c("n", "np", "tau.hat.r.", 
++     "se.tau.hat.r", "all.tau.hat.r", "all.se.tau.hat.r"))
+
+> x <- c(36, 18, 52, 34, 61, 11, 12, 53, 28, 21, 17, 
++     31, 29, 48, 25, 77, 34, 28, 27, 18, 11, 20, 21, 27, 17, 15, 
++     27, 41, 32, 18, 23, 11, .... [TRUNCATED] 
+
+> y <- c(44, 35, 62, 56, 102, 24, 24, 67, 47, 39, 35, 
++     48, 49, 47, 46, 93, 54, 49, 35, 25, 19)
+
+> out["eli_guedem"] = c(length(y), length(x), double_sample_estimate(x, 
++     y), NaN, NaN)
+
+> x <- c(60, 20, 30, 45, 20, 30, 23, 35, 67, 27, 35, 
++     51, 10, 38, 37, 30, 36, 29, 19, 18, 30, 25, 30, 35, 50, 32, 
++     50, 71, 18, 38, 37, 32, .... [TRUNCATED] 
+
+> y <- c(72, 31, 44, 49, 25, 45, 35, 52, 102, 35, 52, 
++     75, 17, 58, 49, 60, 50, 47, 25, 17)
+
+> x.all <- c(x, 35, 28, 21, 32, 28, 31, 28, 22, 18, 
++     14, 54, 45, 31, 21, 30, 43, 45, 36, 32, 68, 19, 40, 29, 28, 
++     25, 61, 50, 35, 18, 20,  .... [TRUNCATED] 
+
+> out["kevin_lia"] = c(length(y), length(x), double_sample_estimate(x, 
++     y), ratio_estimate(x.all, y))
+
+> x <- c(58, 14, 44, 36, 35, 50, 28, 32, 24, 74, 38, 
++     40, 34, 34, 39, 41, 30, 32, 28, 54, 24, 47, 11, 42, 72, 33, 
++     57, 30, 44, 41, 25, 46, .... [TRUNCATED] 
+
+> y <- c(83, 17, 58, 49, 35, 60, 32, 46, 28, 91, 67, 
++     47, 37, 41, 56, 50, 46)
+
+> x.all <- c(x, 24, 80, 19, 24, 43, 37, 63, 48, 36, 
++     63, 47, 53)
+
+> out["caitlin_mike"] = c(length(y), length(x), double_sample_estimate(x, 
++     y), ratio_estimate(x.all, y))
+
+> x <- c(45, 50, 35, 35, 45, 30, 80, 60, 15, 80, 20, 
++     50, 70, 45, 25, 70, 90, 90, 20, 35, 15, 35, 45, 20, 40, 20, 
++     60, 30, 60, 40, 20, 45, .... [TRUNCATED] 
+
+> y <- c(35, 52, 35, 39, 54, 28, 93, 60, 24, 83, 30, 
++     50, 77, 67, 35, 72, 102)
+
+> x.all <- c(x, 35, 60, 40, 30, 40, 50, 20, 15, 13, 
++     25, 70, 50, 12, 45, 80)
+
+> out["ann_jacob"] = c(length(y), length(x), double_sample_estimate(x, 
++     y), ratio_estimate(x.all, y))
+
+> x <- c(55, 75, 25, 65, 35, 55, 75, 80, 160, 70, 20, 
++     85, 30, 35, 25, 45, 20, 60, 20, 30, 40, 30, 25, 25, 15, 30, 
++     40, 25, 60, 35, 45, 30 .... [TRUNCATED] 
+
+> y <- c(56, 102, 28, 75, 41, 50, 83, 91, 112, 60, 17)
+
+> x.all <- c(x, 50, 60, 20, 40, 50, 35, 60, 70, 35, 
++     25, 100, 50, 80, 35, 35, 65, 65, 90, 60, 20, 35, 60, 70, 
++     15, 45, 50, 60, 65, 80)
+
+> out["grand_jon"] = c(length(y), length(x), double_sample_estimate(x, 
++     y), ratio_estimate(x.all, y))
+
+> (round(t(out), 2))
+              n np tau.hat.r. se.tau.hat.r all.tau.hat.r all.se.tau.hat.r
+eli_guedem   21 42    3619.33       220.94           NaN              NaN
+kevin_lia    20 40    4067.64       205.50       3976.48           109.93
+caitlin_mike 17 68    3968.58       135.71       4068.67           118.68
+ann_jacob    17 65    3796.83       162.63       3732.92           130.02
+grand_jon    11 51    3929.41       449.15       4030.00           418.97
+
+> cost_ratios = c(1/5, 1/3, 1/2)
+
+> n = length(y)
+
+> x = x[1:n]
+
+> r = sum(y)/sum(x)
+
+> sr2 <- (1/(n - 1)) * sum((y - r * x)^2)
+
+> s2 <- var(y)
+
+> (sample_ratio = sqrt(cost_ratios * sr2/(s2 - sr2)))
+[1] 0.3485087 0.4499228 0.5510407
+
+> rm(list = ls())
+
+> source("systematic.R")
+
+> flows = scan("fraser.txt")
+
+> N = length(flows)
+
+> k = c(3, 6, 9, 11, 12, 13, 23, 24)
+
+> (systematic_samples = sapply(k, function(k) {
++     systematic(flows, k)
++ }))
+            [,1]      [,2]      [,3]      [,4]     [,5]      [,6]      [,7]
+evalue 2708.8574 2708.9920 2709.1126 2708.9603 2705.987 2708.9423 2709.2400
+stddev  138.0644  958.1681  150.0923  121.9649 2070.483   82.1029  135.2721
+n       403.0000  201.0000  134.0000  110.0000  100.000   93.0000   52.0000
+           [,8]
+evalue 2705.681
+stddev 2025.500
+n        50.000
+
+> (n = floor(length(flows)/k))
+[1] 403 201 134 110 100  93  52  50
+
+> srs_flows = function(n) {
++     samp = sample(flows, n)
++     c(y.bar = mean(samp), `se.y.bar=` = sqrt((1 - n/N) * var(flows)/n))
++ }
+
+> (srs = sapply(n, srs_flows))
+                [,1]      [,2]      [,3]      [,4]     [,5]      [,6]      [,7]
+y.bar     2831.85112 2727.4179 2761.6045 2532.3545 2822.360 2756.7419 2900.3077
+se.y.bar=   86.17753  136.4449  172.5693  192.5794  202.895  211.0546  287.3839
+               [,8]
+y.bar     3190.3400
+se.y.bar=  293.3282
+
+> rm(list = ls())
+
+> N = 400
+
+> np = c(30, 90)
+
+> n = c(30, 25)
+
+> ybar = c(20/30, 4/20)
+
+> w = np/sum(np)
+
+> (ybar.d = sum(w * ybar))
+[1] 0.3166667
+
+> s2.over.n = ybar * (1 - ybar)/(n - 1)
+
+> (se.ybar.d = sqrt((N - 1)/N * sum(((np - 1)/(sum(np) - 
++     1) - (n - 1)/(N - 1)) * (w * s2.over.n))))
+[1] 0.06129392
+
+> n = 50
+
+> (p = 24/n)
+[1] 0.48
+
+> (se.p = sqrt((1 - n/N) * p * (1 - p)/(n - 1)))
+[1] 0.06676184
+
+> clovers = read.csv("SweetCloverTransects.csv")
+
+> width = 108 * 12
+
+> y = tapply(clovers$width, clovers$transect, function(w) {
++     sum(1/(w/width))
++ })
+
+> (v_st = mean(y))
+[1] 739.7165
+
+> (se.v_st = sqrt(var(y)/length(y)))
+[1] 101.0065
+
+> (ci.v_st = v_st + c(-1, 1) * qnorm(0.975) * se.v_st)
+[1] 541.7475 937.6855
+
+> d = 100
+
+> (n_suff = (qnorm(0.975)/d)^2 * var(y))
+[1] 47.03007
+
+> N = 100
+
+> mooses = c(0, 0, 0, 0, 1, 2, 6, 11, 5, 1, 9, 3, 1, 
++     0, 10, 4, 7, 22, 0, 0)
+
+> n = length(mooses)
+
+> p = 0.89
+
+> (tauhat = N * mean(mooses)/p)
+[1] 460.6742
+
+> (var.srs = (N^2/p^2) * ((N - n)/N) * var(y)/n)
+[1] 61824333
+
+> (var.det = (N^2/p^2) * ((1 - p)/N) * mean(mooses))
+[1] 56.93726
+
+> (se.tauhat = sqrt(var.srs + var.det))
+[1] 7862.849
+> 
+> 
